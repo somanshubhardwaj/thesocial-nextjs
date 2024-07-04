@@ -1,5 +1,6 @@
 // app/page.tsx
 'use client';
+
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -7,6 +8,8 @@ import { useEffect } from 'react';
 function HomePage() {
   const { currentUser } = useAuth();
   const router = useRouter();
+  console.log(currentUser);
+ 
 
   useEffect(() => {
     if (!currentUser) {
