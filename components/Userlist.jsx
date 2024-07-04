@@ -1,11 +1,18 @@
 import React from "react";
 import useUserFetch from "../hooks/useUserFetch";
 const Userlist = () => {
-  const { users, loading } = useUserFetch();
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  console.log(users);
+  const users =[
+    {
+    id: 1,
+    fullName: "John Doe",
+    username: "john_doe",
+    avatar: "https://randomuser.me/api/portraits"
+  },
+
+    
+  ]
+
+ 
 
   return (
     <div className="p-4">

@@ -1,8 +1,6 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { checkEmail, checkUsername } from "@/db/checkUser";
-import addUser from "@/db/addUser";
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const { createUser } = useAuth();
