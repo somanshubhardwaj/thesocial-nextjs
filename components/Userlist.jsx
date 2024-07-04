@@ -1,24 +1,30 @@
-import React from "react";
-import useUserFetch from "../hooks/useUserFetch";
+import React, { useEffect ,useState} from "react";
+import useFetchUsers from "@/hooks/useFetchUsers";
+import { useAuth } from "@/context/AuthContext";
 const Userlist = () => {
-  const users =[
-    {
-    id: 1,
-    fullName: "John Doe",
-    username: "john_doe",
-    avatar: "https://randomuser.me/api/portraits"
-  },
+  const { loading, fetchuser } = useFetchUsers();
+  const [users, setUsers] = useState([]);
 
+  const { currentUser } = useAuth();
+  async function fetchUsers() {
+    const res = await fetchuser(currentUser.email);
+    setUsers(res);
+  }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
     
-  ]
-
  
+  console.log(users);
+  if (loading) {
+    return <div className="p-4">Loading...</div>;
+  }
 
   return (
     <div className="p-4">
       <div className="">
         {users.map((user) => (
-          <div className="">
+          <div className="" key={user.id}>
             <div className="flex items-center space-x-2 p-2">
               <img
                 src={user.avatar}

@@ -36,7 +36,6 @@ export async function POST(request: { json: () => PromiseLike<{ fullName: any; u
     }
 
     const user = new User({ fullName, username, email, gender });
-    console.log(user);
     await user.save();
     return new Response(JSON.stringify({ success: true, user }), {
       status: 201,

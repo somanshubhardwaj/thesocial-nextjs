@@ -1,7 +1,9 @@
 "use server"
 import mongoose from "mongoose";
 
-const DATABASE_URL = "mongodb+srv://23bph044:CH293032%23%24SAMI@maincluster.2pltj0f.mongodb.net/social?retryWrites=true&w=majority&appName=maincluster";
+const DATABASE_URL = process.env.MONGO_URL;
+
+let isConnected;
 
 if (!DATABASE_URL) {
   throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
@@ -14,6 +16,10 @@ if (!cached) {
 }
 
 async function connectDB() {
+  if (isConnected) {
+    console.log("using existing database connection");
+    return 
+  }
   if (cached.conn) {
     return cached.conn;
   }
@@ -28,6 +34,7 @@ async function connectDB() {
     });
   }
   cached.conn = await cached.promise;
+  isConnected = cached.conn.connections[0].readyState;
   return cached.conn;
 }
 

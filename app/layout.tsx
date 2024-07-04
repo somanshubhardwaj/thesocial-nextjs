@@ -17,7 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}><AuthProvider><Toaster position="bottom-center" />{children}</AuthProvider></body>
+      <body className={inter.className}>
+        <AuthProvider>
+          <Toaster position="bottom-center" />
+          <div className="p-4 h-screen flex items-center justify-center">
+            {children}
+          </div>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

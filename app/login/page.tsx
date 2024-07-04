@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import useSignin from '@/hooks/useSignin';
+import toast from 'react-hot-toast';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ function Login() {
       if (success){
       router.push('/');}
     } catch (error) {
-      console.error('Failed to login:', error);
+      toast.error('Failed to login:', (error as any).message);
     }
   };
 

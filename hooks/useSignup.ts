@@ -42,7 +42,7 @@ const useSignup = () => {
         body: JSON.stringify({ email, username, fullName, gender }),
       });
       const data = await response.json();
-      console.log(data);
+     
       if (data.error) {
         toast.error(data.error);
         return false;

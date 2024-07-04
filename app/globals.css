@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 body{
-    background: linear-gradient(to bottom , rgba(0, 0, 0, 0.473) ,rgba(0, 0, 0, 0.1)),url("/bg.png");
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.071),rgba(0, 0, 0, 0.367)), url('/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    
     min-height: 100vh;
-}
+  }
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hidden-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
-
+import toast from 'react-hot-toast';
 export default function Logout() {
   const { logout } = useAuth();
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function Logout() {
         await logout();
         router.push('/login');
       } catch (error) {
-        console.error('Failed to logout:', error);
+        toast.error('Failed to logout:', (error as any).message);
       }
     };
     doLogout();

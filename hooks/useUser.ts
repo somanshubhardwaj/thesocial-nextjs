@@ -16,7 +16,7 @@ const useUser = async (email: any) => {
       body: JSON.stringify({ email }),
     });
     const data = await response.json();
-    console.log(data);
+  
     if (data.error) {
       return {
         username: null,

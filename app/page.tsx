@@ -4,7 +4,7 @@ import useUser from "@/hooks/useUser";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import MainSection from "@/components/MainSection";
 function HomePage() {
   const { currentUser } = useAuth();
   const router = useRouter();
@@ -32,14 +32,18 @@ function HomePage() {
   }
 
   return (
-    <div>
+    <MainSection/>
+    
+  );
+}
+
+export default HomePage;
+
+
+{/* <div>
       <h1>Welcome to the protected page, {currentUser.email}!</h1>
       <h2>Your user details:</h2>
       {user?.fullName && <p>Full Name: {user.fullName}</p>}
 
       <a href="/logout">Logout</a>
-    </div>
-  );
-}
-
-export default HomePage;
+    </div> */}

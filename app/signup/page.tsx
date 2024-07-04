@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useSignup from "@/hooks/useSignup";
+import toast from "react-hot-toast";
 function Signup() {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
@@ -35,7 +36,7 @@ function Signup() {
         router.push("/");
       }
     } catch (error) {
-      console.error("Failed to login:", error);
+      toast.error("Failed to Signup:", (error as any).message);
     }
   };
 
