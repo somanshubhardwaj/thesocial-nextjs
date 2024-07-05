@@ -1,6 +1,7 @@
 import connectDB from "@/db/connect.js";
 import User from "@/models/User.model.js";
-export async function POST(request: { json: () => PromiseLike<{ fullName: any; username: any; email: any; gender: any; }> | { fullName: any; username: any; email: any; gender: any; }; }) {
+import { NextRequest } from "next/server";
+export async function POST(request: NextRequest) {
   try {
     await connectDB();
     const { fullName, username, email, gender } = await request.json();

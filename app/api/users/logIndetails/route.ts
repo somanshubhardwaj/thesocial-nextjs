@@ -1,6 +1,7 @@
 import User from "@/models/User.model";
 import connectDB from "@/db/connect";
-export async function POST(request: { json: () => Promise<{ email: string }> }) {
+import { NextRequest } from "next/server";
+export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
     await connectDB();
