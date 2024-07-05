@@ -1,35 +1,38 @@
-const useUser = async (email: any) => {
-  try {
-    if (!email) {
-      return {
-        username: null,
-        fullName: null,
-        profilePicture: null,
-      };
-    }
-    const response = await fetch("/api/users/logIndetails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+import { useAuth } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
+import { getFirestore } from "firebase/firestore";
+import { doc, getDocs,query,where,collection } from "firebase/firestore";
 
-      body: JSON.stringify({ email }),
-    });
-    const data = await response.json();
-  
-    if (data.error) {
-      return {
-        username: null,
-        fullName: null,
-        profilePicture: null,
-      };
-    }
-    return {
-      username: data.username,
-      fullName: data.fullName,
-      profilePicture: data.profilePicture,
+const useUser = () => {
+  const [loading, setLoading] = useState(false);
+  const { currentUser } = useAuth();
+  const [user, setUser] = useState<any>(null);
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (currentUser) {
+        setLoading(true);
+        const q = query(collection(db, "users"), where("userId", "==", currentUser.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setUser(doc.data());
+        });
+       
+        
+
+    
+        setLoading(false);
+      }
     };
-  } catch (error) {}
+
+    fetchUser();
+  }, [currentUser]);
+
+
+
+  return { user, loading };
+
 };
 
 export default useUser;

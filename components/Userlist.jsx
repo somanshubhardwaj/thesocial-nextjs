@@ -1,21 +1,10 @@
-import React, { useEffect ,useState} from "react";
-import useFetchUsers from "@/hooks/useFetchUsers";
-import { useAuth } from "@/context/AuthContext";
-const Userlist = () => {
-  const { loading, fetchuser } = useFetchUsers();
-  const [users, setUsers] = useState([]);
+import React from "react";
 
-  const { currentUser } = useAuth();
-  async function fetchUsers() {
-    const res = await fetchuser(currentUser.email);
-    setUsers(res);
-  }
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-    
+const Userlist = () => {
+  let loading = true;
+
  
-  console.log(users);
+ 
   if (loading) {
     return <div className="p-4">Loading...</div>;
   }

@@ -1,9 +1,10 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { auth, db } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
-  const { createUser } = useAuth();
 
   const SignupUser = async (
     email: string,
@@ -34,21 +35,30 @@ const useSignup = () => {
     }
     try {
       setLoading(true);
-      const response = await fetch("/api/users/createuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, username, fullName, gender }),
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: fullName,
       });
-      const data = await response.json();
-     
-      if (data.error) {
-        toast.error(data.error);
-        return false;
-      }
+      const userRef = await addDoc(collection(db, "users"), {
+        userId: user.uid,
+        username,
+        fullName,
+        gender,
+        email,
+        profilePic: "",
+        bio: "",
+        website: "",
+        followers: [],
+        following: [],
+        createdAt: new Date().toISOString(),
+      });
+      console.log("Document written with ID: ", userRef.id);
 
-      await createUser(email, password);
       toast.success("User created successfully");
 
       return true;

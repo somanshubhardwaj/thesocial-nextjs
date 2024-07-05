@@ -9,6 +9,7 @@ interface AuthContextProps {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   createUser: (email: string, password: string) => Promise<void>;
+  
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);

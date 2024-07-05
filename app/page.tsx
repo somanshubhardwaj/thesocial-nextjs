@@ -5,21 +5,18 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import MainSection from "@/components/MainSection";
+
 function HomePage() {
   const { currentUser } = useAuth();
+ 
   const router = useRouter();
-  const [user, setUser] = useState<
-    { username: any; fullName: any; profilePicture: any } | undefined
-  >(undefined);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userData = await useUser(currentUser?.email);
-      setUser(userData);
-    };
+  const { user, loading } = useUser();
 
-    fetchUser();
-  }, [currentUser]);
+  console.log(user);
+
+
+
 
   useEffect(() => {
     if (!currentUser) {
