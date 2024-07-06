@@ -8,12 +8,12 @@ const MainSection = () => {
   return (
     <div className="flex  gap-3 h-full justify-between w-full flex-col sm:flex-row overflow-auto sm:overflow-hidden">
       <div className=" flex justify-center">
-        <div className="w-3/4 sm:w-60 md:w-80 sm:overflow-auto rounded-3xl sm:h-full hidden-scrollbar shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+        <div className="w-full sm:w-60 md:w-80 sm:overflow-auto rounded-3xl sm:h-full hidden-scrollbar shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
           <Sidebar />
         </div>
       </div>
       <div className=" flex-1 flex justify-center ">
-        <div className="w-3/4 sm:overflow-auto hidden-scrollbar">
+        <div className="w-full sm:w-3/4 sm:overflow-auto hidden-scrollbar">
           <Post />
           <Postlist />
         </div>
