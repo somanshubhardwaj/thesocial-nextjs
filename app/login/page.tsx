@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import useSignin from '@/hooks/useSignin';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,6 +61,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 text-gray-800 bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
+        </div>
+        <div className="">
+          <Link href="/signup">
+            <a className="text-blue-500">Create an account</a>
+          </Link>
         </div>
         <button
           type="submit"
