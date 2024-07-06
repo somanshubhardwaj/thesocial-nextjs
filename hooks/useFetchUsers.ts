@@ -1,25 +1,36 @@
-import { useState } from "react";
-
-const useFetchUsers = (email: string) => {
+import { useState, useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
+const useFetchUsers = () => {
   const [loading, setLoading] = useState(false);
-  const fetchuser = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/users/fetchusers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      console.log(data);
-      return data;
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-  return { fetchuser, loading };
+  const { currentUser } = useAuth();
+  const [userList, setUserList] = useState<any>([]);
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (currentUser) {
+        setLoading(true);
+        const q = query(
+          collection(db, "users"),
+          where("userId", "==", currentUser.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        setUserList(querySnapshot.docs.map((doc) => doc.data()));
+
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [currentUser]);
+
+  return { userList, loading };
 };
 export default useFetchUsers;

@@ -13,7 +13,7 @@ function HomePage() {
 
   const { user, loading } = useUser();
 
-  console.log(user);
+
 
 
 
