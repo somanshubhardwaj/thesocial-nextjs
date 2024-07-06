@@ -7,7 +7,7 @@ import Link from "next/link";
 const Sidebar = () => {
   const { user, loading } = useUser();
   return (
-    <div className="p-4 flex flex-col justify-between h-full">
+    <div className="p-4 flex flex-col justify-between h-full gap-4">
       <div className="flex gap-3 mt-4 flex-col">
         <div className="flex items-center gap-3 ">
           <FaXTwitter className="text-4xl text-white" />
