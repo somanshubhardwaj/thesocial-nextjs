@@ -18,9 +18,9 @@ const MainSection = () => {
           <Postlist />
         </div>
       </div>
-      {/* <div className="w-80  overflow-auto rounded-3xl h-full hidden-scrollbar  shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+      <div className="w-80  overflow-auto rounded-3xl h-full hidden-scrollbar  shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <Userlist />
-      </div> */}
+      </div>
     </div>
   );
 };

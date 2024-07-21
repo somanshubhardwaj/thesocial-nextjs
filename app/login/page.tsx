@@ -63,8 +63,8 @@ function Login() {
           />
         </div>
         <div className="">
-          <Link href="/signup">
-            <a className="text-blue-500">Create an account</a>
+          <Link href="/signup" className="text-blue-500">
+           Create an account
           </Link>
         </div>
         <button

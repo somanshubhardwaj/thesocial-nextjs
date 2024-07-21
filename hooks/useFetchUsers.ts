@@ -19,7 +19,7 @@ const useFetchUsers = () => {
         setLoading(true);
         const q = query(
           collection(db, "users"),
-          where("userId", "==", currentUser.uid)
+          where("userId", "!=", currentUser.uid)
         );
         const querySnapshot = await getDocs(q);
         setUserList(querySnapshot.docs.map((doc) => doc.data()));

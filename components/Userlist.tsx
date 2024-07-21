@@ -1,7 +1,12 @@
 import React from "react";
 import useFetchUsers from "@/hooks/useFetchUsers";
+import useFollow from "@/hooks/useFollow";
 const Userlist = () => {
   const { userList, loading } = useFetchUsers();
+  const { followUser } = useFollow();
+  const handleFollow = async (username: string) => {
+    await followUser(username);
+  };
 
   if (loading) {
     return <div className="p-4">Loading...</div>;
@@ -9,11 +14,14 @@ const Userlist = () => {
     return (
       <div className="p-4">
         <div className="">
-          {userList.map((user:any) => (
+          {userList.map((user: any) => (
             <div className="" key={user.username}>
               <div className="flex items-center space-x-2 p-2">
                 <img
-                  src={user.profilePic || "https://www.gravatar.com/avatar/000?d=mp"}
+                  src={
+                    user.profilePic ||
+                    "https://www.gravatar.com/avatar/000?d=mp"
+                  }
                   alt="avatar"
                   className="w-10 h-10 rounded-full"
                 />
@@ -22,9 +30,12 @@ const Userlist = () => {
                   <p className="text-gray-500 text-sm">@{user.username}</p>
                 </div>
 
-                <button className="ml-auto px-2 py-1 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">
+                {/* <button
+                  className="ml-auto px-2 py-1 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                  onClick={() => handleFollow(user.username)}
+                >
                   Follow
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
